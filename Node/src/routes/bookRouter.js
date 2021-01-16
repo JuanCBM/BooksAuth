@@ -4,6 +4,7 @@ const { Book, toResponse: toResponseBook } = require('../models/book.js');
 const User = require('../models/user.js').User;
 const toResponseComment = require('../models/comment.js').toResponse;
 const mongoose = require('mongoose');
+const VerifyToken = require('../services/VerifyToken');
 
 const INVALID_BOOK_ID_RESPONSE = { "error": "Invalid book id" };
 const BOOK_NOT_FOUND_RESPONSE = { "error": "Book not found" }
@@ -13,7 +14,7 @@ router.get('/', async (req, res) => {
     res.json(toResponseBook(allBooks));
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', VerifyToken, async (req, res) => {
     const id = req.params.id;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -30,7 +31,7 @@ router.get('/:id', async (req, res) => {
     res.json(toResponseBook(book));
 });
 
-router.post('/', async (req, res) => {
+router.post('/', VerifyToken, async (req, res) => {
 
     const book = new Book({
         title: req.body.title,
@@ -50,7 +51,7 @@ router.post('/', async (req, res) => {
 });
 
 
-router.post('/:id/comments', async (req, res) => {
+router.post('/:id/comments', VerifyToken, async (req, res) => {
     const id = req.params.id;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -90,7 +91,7 @@ router.post('/:id/comments', async (req, res) => {
 });
 
 
-router.delete('/:id/comments/:commentId', async (req, res) => {
+router.delete('/:id/comments/:commentId', VerifyToken, async (req, res) => {
     const id = req.params.id;
     const commentId = req.params.commentId;
 

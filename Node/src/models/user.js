@@ -19,7 +19,12 @@ const userSchema = new mongoose.Schema({
             message: props => `${props.value} is not a valid email`
         },
         required: [true, 'Email is mandatory']
-    }
+    },
+    password: {
+        type: String,
+        required: [true, 'Password is mandatory'],
+        unique: false
+    },
 });
 
 const User = mongoose.model('User', userSchema);

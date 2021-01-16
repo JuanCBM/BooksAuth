@@ -3,16 +3,19 @@ const router = express.Router();
 const { User, toResponse, isValidEmail } = require('../models/user.js');
 const Book = require('../models/book.js').Book;
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+const VerifyToken = require('../services/VerifyToken');
 
 const INVALID_USER_ID_RESPONSE = { "error": "Invalid user id" };
 const USER_NOT_FOUND_RESPONSE = { "error": "User not found" };
 
-router.get('/', async (req, res) => {
+router.get('/', VerifyToken, async (req, res) => {
     const allUsers = await User.find().exec();
     res.json(toResponse(allUsers));
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', VerifyToken, async (req, res) => {
     const id = req.params.id;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -37,7 +40,8 @@ router.post('/', async (req, res) => {
 
     const user = new User({
         nick: req.body.nick,
-        email: req.body.email
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 8)
     });
 
     try {
@@ -51,7 +55,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', VerifyToken, async (req, res) => {
     const id = req.params.id;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -73,7 +77,7 @@ router.patch('/:id', async (req, res) => {
 
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', VerifyToken, async (req, res) => {
     const id = req.params.id;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -95,7 +99,7 @@ router.delete('/:id', async (req, res) => {
     res.json(toResponse(user));
 });
 
-router.get('/:id/comments', async (req, res) => {
+router.get('/:id/comments', VerifyToken, async (req, res) => {
     const id = req.params.id;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {

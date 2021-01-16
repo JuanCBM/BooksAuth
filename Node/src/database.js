@@ -3,7 +3,6 @@ const url = "mongodb://localhost:27017/booksDB";
 const User = require('./models/user.js').User;
 const Book = require('./models/book.js').Book;
 
-
 async function connect() {
 
     await mongoose.connect(url, {
@@ -32,14 +31,16 @@ async function init() {
 
     await new User({
         _id: new mongoose.Types.ObjectId("5fda3234e9e3fd53e3907bed"),
-        nick: "user1",
-        email: "user1@email.es"
+        nick: "jua_ma",
+        email: "user1@email.es",
+        password: "$2a$10$XURPShQNCsLjp1ESc2laoObo9QZDhxz73hJPaEv7/cBha4pk0AgP."
     }).save();
 
     await new User({
         _id: new mongoose.Types.ObjectId("5fda3234e9e3fd53e3907bef"),
-        nick: "user2",
-        email: "user2@email.es"
+        nick: "jua_ma2",
+        email: "user2@email.es",
+        password: "$2a$10$XURPShQNCsLjp1ESc2laoObo9QZDhxz73hJPaEv7/cBha4pk0AgP."
     }).save();
 
     console.log('Populating database with books');

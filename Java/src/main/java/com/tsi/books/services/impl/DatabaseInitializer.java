@@ -33,7 +33,7 @@ public class DatabaseInitializer {
     List<User> users = Arrays.asList(
         new User("jua_ma", "mimail@email.com",
             "$2a$10$XURPShQNCsLjp1ESc2laoObo9QZDhxz73hJPaEv7/cBha4pk0AgP."),
-        new User("jua_ma_no_comments", "mimail2@email.com",
+        new User("jua_ma2", "mimail2@email.com",
             "$2a$10$XURPShQNCsLjp1ESc2laoObo9QZDhxz73hJPaEv7/cBha4pk0AgP."));
     userRepository.saveAll(users);
 

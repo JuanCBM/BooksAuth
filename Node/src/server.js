@@ -2,6 +2,8 @@ const express = require('express');
 const database = require('./database.js');
 const booksRouter = require('./routes/bookRouter.js');
 const usersRouter = require('./routes/userRouter.js');
+const authRouter = require('./routes/authRouter.js');
+
 const app = express();
 const https = require('https');
 const fs = require('fs');
@@ -11,6 +13,7 @@ const path = require("path");
 app.use(express.json());
 app.use('/api/v1/books', booksRouter);
 app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/login', authRouter);
 
 async function main() {
 
