@@ -13,6 +13,7 @@ import com.tsi.books.services.UserService;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -22,11 +23,14 @@ public class UserServiceImpl implements UserService {
   private final UserRepository userRepository;
   private final CommentRepository commentRepository;
   private final ModelMapper modelMapper;
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-  UserServiceImpl(UserRepository userRepository, CommentRepository commentRepository) {
+  UserServiceImpl(UserRepository userRepository, CommentRepository commentRepository,
+      BCryptPasswordEncoder bCryptPasswordEncoder) {
     this.modelMapper = new ModelMapper();
     this.userRepository = userRepository;
     this.commentRepository = commentRepository;
+    this.bCryptPasswordEncoder = bCryptPasswordEncoder;
   }
 
   @Override
@@ -46,6 +50,7 @@ public class UserServiceImpl implements UserService {
       throw new UserAlreadyFoundException();
     }
     User user = this.modelMapper.map(userRequestDto, User.class);
+    user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
     this.userRepository.save(user);
 
     return this.modelMapper.map(user, UserResponseDto.class);

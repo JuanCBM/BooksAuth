@@ -2,7 +2,9 @@ package com.tsi.books.security;
 
 import static com.tsi.books.security.Constants.BOOKS_URL;
 import static com.tsi.books.security.Constants.LOGIN_URL;
+import static com.tsi.books.security.Constants.USER_URLS;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,7 +25,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
   private final UserDetailsService userDetailsService;
 
-  public WebSecurity(UserDetailsService userDetailsService) {
+  public WebSecurity(
+      @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
     this.userDetailsService = userDetailsService;
   }
 
@@ -43,7 +46,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
      */
     //httpSecurity.authorizeRequests().antMatchers("/").permitAll();
     //httpSecurity.csrf().disable();
-    
+
     httpSecurity
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         .cors().and()
@@ -51,6 +54,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
         .antMatchers(HttpMethod.GET, BOOKS_URL).permitAll()
+        .antMatchers(HttpMethod.POST, USER_URLS).permitAll()
+
         .anyRequest().authenticated().and()
         .addFilter(new JWTAuthenticationFilter(authenticationManager()))
         .addFilter(new JWTAuthorizationFilter(authenticationManager()));
