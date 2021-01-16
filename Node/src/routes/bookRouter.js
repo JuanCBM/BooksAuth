@@ -4,7 +4,7 @@ const { Book, toResponse: toResponseBook } = require('../models/book.js');
 const User = require('../models/user.js').User;
 const toResponseComment = require('../models/comment.js').toResponse;
 const mongoose = require('mongoose');
-const VerifyToken = require('../services/VerifyToken');
+const VerifyToken = require('../services/verifyToken');
 
 const INVALID_BOOK_ID_RESPONSE = { "error": "Invalid book id" };
 const BOOK_NOT_FOUND_RESPONSE = { "error": "Book not found" }

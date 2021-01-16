@@ -5,7 +5,7 @@ const Book = require('../models/book.js').Book;
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const VerifyToken = require('../services/VerifyToken');
+const VerifyToken = require('../services/verifyToken');
 
 const INVALID_USER_ID_RESPONSE = { "error": "Invalid user id" };
 const USER_NOT_FOUND_RESPONSE = { "error": "User not found" };
