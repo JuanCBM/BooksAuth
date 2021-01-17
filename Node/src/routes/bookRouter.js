@@ -118,4 +118,15 @@ router.delete('/:id/comments/:commentId', VerifyToken, async (req, res) => {
 
 });
 
+// TODO: Borra un libro
+router.delete('/:id', VerifyToken, async (req,res)=> {
+
+})
+
+// TODO: Actualiza un libro
+router.put('/:id', VerifyToken, async (req,res)=> {
+
+
+})
+
 module.exports = router;
