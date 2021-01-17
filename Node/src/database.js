@@ -50,18 +50,18 @@ async function init() {
     await new Book({
         _id: new mongoose.Types.ObjectId("5fda3234e9e3fd53e3907bf0"),
         title: "Book 1 title",
-        summary: "Book 1 summary",
+        resume: "Book 1 resume",
         author: "Book 1 author",
-        publisher: "Book 1 publisher",
+        editorial: "Book 1 editorial",
         publicationYear: 1992
     }).save();
 
     const book2 = await new Book({
         _id: new mongoose.Types.ObjectId("5fda350d3749aa4832165b84"),
         title: "Book 2 title",
-        summary: "Book 2 summary",
+        resume: "Book 2 resume",
         author: "Book 2 author",
-        publisher: "Book 2 publisher",
+        editorial: "Book 2 editorial",
         publicationYear: 2006
     }).save();
 
@@ -69,14 +69,14 @@ async function init() {
 
     book2.comments.push({
         _id: new mongoose.Types.ObjectId("5fdb4812df5c2555a401b6da"),
-        comment: "Book 2 comment 1 from user 1",
-        score: 2.6,
+        content: "Book 2 comment 1 from user 1",
+        rating: 2.6,
         user: new mongoose.Types.ObjectId("5fda3234e9e3fd53e3907bed")
     });
     book2.comments.push({
         _id: new mongoose.Types.ObjectId("5fdb4812df5c2555a401b6db"),
-        comment: "Book 2 comment 2 from user 1",
-        score: 4,
+        content: "Book 2 comment 2 from user 1",
+        rating: 4,
         user: new mongoose.Types.ObjectId("5fda3234e9e3fd53e3907bed")
     });
 

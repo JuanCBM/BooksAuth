@@ -6,14 +6,14 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Title is mandatory']
     },
-    summary: String,
+    resume: String,
     author: {
         type: String,
         required: [true, 'Author is mandatory']
     },
-    publisher: {
+    editorial: {
         type: String,
-        required: [true, 'Publisher is mandatory']
+        required: [true, 'Editorial is mandatory']
     },
     publicationYear: {
         type: Number,

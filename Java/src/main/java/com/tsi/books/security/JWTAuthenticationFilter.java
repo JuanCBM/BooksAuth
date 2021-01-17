@@ -53,7 +53,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
       FilterChain chain,
       Authentication auth) {
 
-    String token = Jwts.builder().setIssuedAt(new Date()).setIssuer(ISSUER_INFO)
+    String token = Jwts.builder()
+        .setIssuedAt(new Date()).setIssuer(ISSUER_INFO)
         .setSubject(((User) auth.getPrincipal()).getUsername())
         .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
         .signWith(SignatureAlgorithm.HS512, SUPER_SECRET_KEY).compact();

@@ -35,9 +35,9 @@ router.post('/', VerifyToken, async (req, res) => {
 
     const book = new Book({
         title: req.body.title,
-        summary: req.body.summary,
+        resume: req.body.resume,
         author: req.body.author,
-        publisher: req.body.publisher,
+        editorial: req.body.editorial,
         publicationYear: req.body.publicationYear,
     });
 
@@ -57,7 +57,7 @@ router.post('/:id/comments', VerifyToken, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).send(INVALID_BOOK_ID_RESPONSE);
     }
-    if (!req.body.userNick) {
+    if (!req.body.nick) {
         return res.status(400).send({ "error": "User nick is mandatory" });
     }
 
@@ -66,14 +66,14 @@ router.post('/:id/comments', VerifyToken, async (req, res) => {
         return res.status(404).send(BOOK_NOT_FOUND_RESPONSE);
     }
 
-    const user = await User.findOne({ nick: req.body.userNick })
+    const user = await User.findOne({ nick: req.body.nick })
     if (!user) {
         return res.status(404).json({ "error": "User not found" });
     };
 
     book.comments.push({
-        comment: req.body.comment,
-        score: req.body.score,
+        content: req.body.content,
+        rating: req.body.rating,
         user: user._id
     });
 
@@ -117,5 +117,15 @@ router.delete('/:id/comments/:commentId', VerifyToken, async (req, res) => {
     res.json(toResponseComment(comment));
 
 });
+
+// TODO: Borra un libro
+router.delete('/:id', VerifyToken, async (req,res)=> {
+
+})
+
+// TODO: Actualiza un libro
+router.put('/:id', VerifyToken, async (req,res)=> {
+
+})
 
 module.exports = router;
