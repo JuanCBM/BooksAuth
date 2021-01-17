@@ -1,17 +1,17 @@
 {
-    "name": "practice-2-databases-node-mongodb",
-    "version": "1.0.0",
-    "scripts": {
-        "start": "node src/server",
-        "dev": "nodemon src/server"
-    },
-    "dependencies": {
-        "express": "4.17.1",
-        "mongoose": "5.11.7",
-        "bcryptjs": "^2.4.3",
-        "jsonwebtoken": "^8.5.1"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.6"
-    }
+  "name": "practice-2-databases-node-mongodb",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/server",
+    "dev": "nodemon src/server"
+  },
+  "dependencies": {
+    "express": "4.17.1",
+    "mongoose": "5.11.7",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
 }

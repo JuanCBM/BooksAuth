@@ -17,20 +17,20 @@ app.use('/api/v1/login', authRouter);
 
 async function main() {
 
-    await database.connect();
+  await database.connect();
 
-    https.createServer({
-        key: fs.readFileSync(path.resolve(__dirname, "../server.key")),
-        cert: fs.readFileSync(path.resolve(__dirname, "../server.cert"))
-    }, app).listen(3000, () => {
-        console.log('Server listening on port 3000!');
-    });
+  https.createServer({
+    key: fs.readFileSync(path.resolve(__dirname, "../server.key")),
+    cert: fs.readFileSync(path.resolve(__dirname, "../server.cert"))
+  }, app).listen(3000, () => {
+    console.log('Server listening on port 3000!');
+  });
 
-    process.on('SIGINT', () => {
-        database.disconnect();
-        console.log('Process terminated');
-        process.exit(0);
-    });
+  process.on('SIGINT', () => {
+    database.disconnect();
+    console.log('Process terminated');
+    process.exit(0);
+  });
 }
 
 main();
