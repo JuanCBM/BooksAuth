@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
     const user = new User({
         nick: req.body.nick,
         email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 8)
+        password: bcrypt.hashSync(req.body.password)
     });
 
     try {

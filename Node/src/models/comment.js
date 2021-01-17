@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const User = require('./user.js');
 
 const commentSchema = new mongoose.Schema({
-    comment: {
+    content: {
         type: String,
-        required: [true, 'Comment is mandatory']
+        required: [true, 'Content is mandatory']
     },
-    score: {
+    rating: {
         type: Number,
-        min: [0, 'Score must be at least 0'],
-        max: [5, 'Score must be less or equals than 5'],
-        required: [true, 'Score is mandatory']
+        min: [0, 'Rating must be at least 0'],
+        max: [5, 'Rating must be less or equals than 5'],
+        required: [true, 'Rating is mandatory']
     },
     //Other alternative is just put here the nick and mail for the user to avoid lookup or populate when getting the comment. But when a change is performed in user, these values have to be updated in every comment of the database
     user: {
