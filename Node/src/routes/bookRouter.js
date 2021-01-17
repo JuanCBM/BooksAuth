@@ -126,7 +126,6 @@ router.delete('/:id', VerifyToken, async (req,res)=> {
 // TODO: Actualiza un libro
 router.put('/:id', VerifyToken, async (req,res)=> {
 
-
 })
 
 module.exports = router;
