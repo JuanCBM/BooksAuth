@@ -1,71 +1,78 @@
 package com.tsi.books.controllers;
 
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
 import com.tsi.books.dtos.requests.BookRequestDto;
 import com.tsi.books.dtos.requests.CommentRequestDto;
 import com.tsi.books.dtos.responses.BookDetailsResponseDto;
 import com.tsi.books.dtos.responses.BookResponseDto;
 import com.tsi.books.services.BookService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.net.URI;
 import java.util.Collection;
-
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("books")
 public class BookController {
 
-    private final BookService bookService;
+  private final BookService bookService;
 
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
+  public BookController(BookService bookService) {
+    this.bookService = bookService;
+  }
 
-    @GetMapping({"/", ""})
-    public ResponseEntity<Collection<BookResponseDto>> list() {
-        return ResponseEntity.ok(this.bookService.findAll());
-    }
+  @GetMapping({"/", ""})
+  public ResponseEntity<Collection<BookResponseDto>> list() {
+    return ResponseEntity.ok(this.bookService.findAll());
+  }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<BookDetailsResponseDto> get(@PathVariable long id) {
-        return ResponseEntity.ok(this.bookService.findById(id));
-    }
+  @GetMapping("/{id}")
+  public ResponseEntity<BookDetailsResponseDto> get(@PathVariable long id) {
+    return ResponseEntity.ok(this.bookService.findById(id));
+  }
 
-    @PostMapping({"/", ""})
-    public ResponseEntity<BookDetailsResponseDto> create(@RequestBody BookRequestDto bookRequestDto) {
-        BookDetailsResponseDto book = this.bookService.save(bookRequestDto);
-        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(book.getId()).toUri();
+  @PostMapping({"/", ""})
+  public ResponseEntity<BookDetailsResponseDto> create(@RequestBody BookRequestDto bookRequestDto) {
+    BookDetailsResponseDto book = this.bookService.save(bookRequestDto);
+    URI location = fromCurrentRequest().path("/{id}").buildAndExpand(book.getId()).toUri();
 
-        return ResponseEntity.created(location).body(book);
-    }
+    return ResponseEntity.created(location).body(book);
+  }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<BookDetailsResponseDto> delete(@PathVariable long id) {
-        return ResponseEntity.ok(this.bookService.deleteById(id));
-    }
+  @DeleteMapping("/{id}")
+  public ResponseEntity<BookDetailsResponseDto> delete(@PathVariable long id) {
+    return ResponseEntity.ok(this.bookService.deleteById(id));
+  }
 
-    @PostMapping("/{idBook}/comments")
-    public ResponseEntity<BookDetailsResponseDto> createComment(@PathVariable long idBook, @RequestBody CommentRequestDto comment) {
-        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(idBook).toUri();
+  @PostMapping("/{idBook}/comments")
+  public ResponseEntity<BookDetailsResponseDto> createComment(@PathVariable long idBook,
+      @RequestBody CommentRequestDto comment) {
+    URI location = fromCurrentRequest().path("/{id}").buildAndExpand(idBook).toUri();
 
-        return ResponseEntity.created(location).body(this.bookService.addComment(idBook, comment));
-    }
+    return ResponseEntity.created(location).body(this.bookService.addComment(idBook, comment));
+  }
 
-    @DeleteMapping("/{idBook}/comments/{commentId}")
-    public ResponseEntity<BookDetailsResponseDto> deleteComment(
-            @PathVariable long idBook,
-            @PathVariable long commentId) {
-        return ResponseEntity.ok(this.bookService.deleteComment(idBook, commentId));
-    }
+  @DeleteMapping("/{idBook}/comments/{commentId}")
+  public ResponseEntity<BookDetailsResponseDto> deleteComment(
+      @PathVariable long idBook,
+      @PathVariable long commentId) {
+    return ResponseEntity.ok(this.bookService.deleteComment(idBook, commentId));
+  }
 
-    @PutMapping({"/{idBook}"})
-    public ResponseEntity<BookDetailsResponseDto> update(
-            @PathVariable long idBook,
-            @RequestBody BookRequestDto bookRequestDto) {
+  @PutMapping({"/{idBook}"})
+  public ResponseEntity<BookDetailsResponseDto> update(
+      @PathVariable long idBook,
+      @RequestBody BookRequestDto bookRequestDto) {
 
-        return ResponseEntity.ok(this.bookService.update(idBook, bookRequestDto));
-    }
+    return ResponseEntity.ok(this.bookService.update(idBook, bookRequestDto));
+  }
 
 }

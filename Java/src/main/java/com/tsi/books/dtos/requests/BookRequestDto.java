@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BookRequestDto {
 
-    private String title;
-    private String resume;
-    private String author;
-    private String editorial;
-    private int publicationYear;
+  private String title;
+  private String resume;
+  private String author;
+  private String editorial;
+  private int publicationYear;
 
 }

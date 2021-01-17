@@ -4,21 +4,21 @@ import com.tsi.books.dtos.requests.BookRequestDto;
 import com.tsi.books.dtos.requests.CommentRequestDto;
 import com.tsi.books.dtos.responses.BookDetailsResponseDto;
 import com.tsi.books.dtos.responses.BookResponseDto;
-
 import java.util.Collection;
 
 public interface BookService {
-    Collection<BookResponseDto> findAll();
 
-    BookDetailsResponseDto save(BookRequestDto bookRequestDto);
+  Collection<BookResponseDto> findAll();
 
-    BookDetailsResponseDto findById(Long id);
+  BookDetailsResponseDto save(BookRequestDto bookRequestDto);
 
-    BookDetailsResponseDto deleteById(Long id);
+  BookDetailsResponseDto findById(Long id);
 
-    BookDetailsResponseDto addComment(Long idBook, CommentRequestDto comment);
+  BookDetailsResponseDto deleteById(Long id);
 
-    BookDetailsResponseDto deleteComment(Long idBook, Long commentId);
+  BookDetailsResponseDto addComment(Long idBook, CommentRequestDto comment);
 
-    BookDetailsResponseDto update(Long idBook, BookRequestDto bookRequestDto);
+  BookDetailsResponseDto deleteComment(Long idBook, Long commentId);
+
+  BookDetailsResponseDto update(Long idBook, BookRequestDto bookRequestDto);
 }

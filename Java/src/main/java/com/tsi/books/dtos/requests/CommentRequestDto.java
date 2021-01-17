@@ -7,8 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class CommentRequestDto {
 
-    private String nick;
-    private String content;
-    private int rating;
+  private String nick;
+  private String content;
+  private int rating;
 
 }

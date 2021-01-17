@@ -4,21 +4,21 @@ import com.tsi.books.dtos.requests.UserRequestDto;
 import com.tsi.books.dtos.responses.CommentDetailsResponseDto;
 import com.tsi.books.dtos.responses.UserResponseDto;
 import com.tsi.books.models.User;
-
 import java.util.Collection;
 
 public interface UserService {
-    UserResponseDto findById(Long id);
 
-    User findByNick(String nick);
+  UserResponseDto findById(Long id);
 
-    UserResponseDto save(UserRequestDto user);
+  User findByNick(String nick);
 
-    UserResponseDto updateMail(Long id, UserRequestDto user);
+  UserResponseDto save(UserRequestDto user);
 
-    UserResponseDto deleteById(Long id);
+  UserResponseDto updateMail(Long id, UserRequestDto user);
 
-    Collection<CommentDetailsResponseDto> findCommentsById(Long id);
+  UserResponseDto deleteById(Long id);
 
-    Collection<UserResponseDto> findAll();
+  Collection<CommentDetailsResponseDto> findCommentsById(Long id);
+
+  Collection<UserResponseDto> findAll();
 }
