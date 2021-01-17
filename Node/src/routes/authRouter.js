@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
     return res.status(401).send({auth: false, token: null});
   }
 
-  const token = jwt.sign({id: user.nick}, config.secret, {
+  const token = jwt.sign({sub: user.nick}, config.secret, {
     expiresIn: 86400 // expires in 24 hours
   });
 
