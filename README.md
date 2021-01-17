@@ -29,13 +29,8 @@ Desde el postman sería sin utilizar la cabecera 'x-access-token', utilizamos la
 ![postman_capture.png](postman_capture.png)
 
 # Ejecución de la aplicación:
-**1.** Primero debemos ejecutar los comandos docker para disponer de las diferentes BBDD:
-    
-   - Java Spring MySQL:
-   > docker run -p 3306:3306 --name mysql-db -e MYSQL_ROOT_PASSWORD=pass -e MYSQL_DATABASE=test -e -d mysql:latest
-    
-   - JavaScript Node Mongo:
-   > docker run -d -p 27017:27017 --name mongo-db mongo:latest
+**1.** Primero debemos ejecutar los comandos docker para disponer de las diferentes BBDD. Hemos preparado un script para poder ejecutarlo de forma más comoda:
+> node exec_dockers.js
 
 **2.** Situándonos en la carpeta del proyecto, ejecutamos el comando que permitirá la instalación de las dependencias de todos los proyectos
 > node install.js
