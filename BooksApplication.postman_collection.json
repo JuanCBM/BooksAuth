@@ -96,7 +96,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:{{port}}/api/v1/books/3",
+							"raw": "https://localhost:{{port}}/api/v1/books/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -106,7 +106,7 @@
 								"api",
 								"v1",
 								"books",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -127,7 +127,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:{{port}}/api/v1/books/5fd797f3f5cc1e3be45d1818/comments",
+							"raw": "https://localhost:{{port}}/api/v1/books/1/comments",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -137,7 +137,7 @@
 								"api",
 								"v1",
 								"books",
-								"5fd797f3f5cc1e3be45d1818",
+								"1",
 								"comments"
 							]
 						}
@@ -159,7 +159,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:{{port}}/api/v1/books/5fd797f3f5cc1e3be45d1818/comments/5fd7a007ade160207092bd7a",
+							"raw": "https://localhost:{{port}}/api/v1/books/1/comments/3",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -169,9 +169,9 @@
 								"api",
 								"v1",
 								"books",
-								"5fd797f3f5cc1e3be45d1818",
+								"1",
 								"comments",
-								"5fd7a007ade160207092bd7a"
+								"3"
 							]
 						}
 					},
@@ -183,7 +183,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:{{port}}/api/v1/books/5fd7868913154715cc8825be",
+							"raw": "https://localhost:{{port}}/api/v1/books/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -193,7 +193,7 @@
 								"api",
 								"v1",
 								"books",
-								"5fd7868913154715cc8825be"
+								"1"
 							]
 						},
 						"description": "Delete a book by id"
@@ -208,9 +208,6 @@
 				{
 					"name": "getUsers",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
