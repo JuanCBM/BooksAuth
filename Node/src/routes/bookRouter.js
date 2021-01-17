@@ -118,14 +118,52 @@ router.delete('/:id/comments/:commentId', VerifyToken, async (req, res) => {
 
 });
 
-// TODO: Borra un libro
 router.delete('/:id', VerifyToken, async (req,res)=> {
+    const bookId = req.params.idBook;
 
+    if (!mongoose.Types.ObjectId.isValid(bookId)) {
+        return res.status(400).send(INVALID_BOOK_ID_RESPONSE);
+    }
+    const book = await Book.findById(id);
+    if (!book) {
+        return res.status(404).send(BOOK_NOT_FOUND_RESPONSE);
+    }
+    book.remove()
+    res.json(toResponseBook(book));
 })
 
-// TODO: Actualiza un libro
 router.put('/:id', VerifyToken, async (req,res)=> {
 
+    const bookId = req.params.id;
+    if(!mongoose.Types.ObjectId.isValid(bookId)){
+        return res.sendStatus(400);
+    }
+    const persistedBook = await Book.findById(bookId);
+
+    const book = new Book({
+        title: req.body.title,
+        resume: req.body.resume,
+        author: req.body.author,
+        editorial: req.body.editorial,
+        publicationYear: req.body.publicationYear,
+    });
+
+    if (!persistedBook) {
+        res.sendStatus(404);
+    } else {
+        persistedBook.title = book.title;
+        persistedBook.author = book.author;
+        persistedBook.resume = book.resume;
+        persistedBook.editorial = book.editorial;
+        persistedBook.publicationYear = book.publicationYear;
+    }
+
+    await persistedBook.save()
+    .then(savedBook => res.json(toResponseBook(savedBook)))
+    .catch(error => {
+        console.log(error);
+        res.status(400).send(error);
+    });
 })
 
 module.exports = router;
